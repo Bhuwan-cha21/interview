@@ -1,17 +1,19 @@
-
 import '../App.css'
-export const DisTodo = (props) => {
+export const DisTodo = ({details,isCompleted,name,index, type, completeTodo, delTodo}) => {
     return (
       <div className="Item"
-        style={{ backgroundColor: props.completed ? "green" : "white" }}
+        
       >
-        <span className='todohead' style={{ textDecoration: props.isCompleted ? "line-through" : "" }}>{props.name}</span>
-        {props.isCompleted ? <button className='btn' onClick={()=>{
-                   props.uncompleteTodo(props.index)
-                }}>unComplete</button> : <button className='btn' onClick={()=>{
-                    props.completeTodo(props.index)
+        <p>Todo type:{type}</p>
+        <p>{details}</p>
+        <span className='todohead' style={{ textDecoration: isCompleted ? "line-through" : "" }}>{name}</span><br></br>
+        {isCompleted ? <button 
+                   
+                >Completed</button> : <button className='btn' onClick={()=>{
+                    completeTodo(index)
                 }}>complete</button>}
-        <button onClick={() => props.delTodo(props.index)}> X </button>
+        <button onClick={() => delTodo(index)}> X </button>
+        
       </div>
     );
   };

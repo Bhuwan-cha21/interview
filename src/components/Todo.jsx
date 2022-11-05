@@ -1,71 +1,57 @@
-import {  useRef, useState } from "react";
-import { DisTodo } from "./disTodo";
+import {  useState } from "react";
+import { DisTodo } from "./DisTodo";
+import InputTodo from "./InputTodo";
 import '../App.css'
 
 export default function App() {
- const[todo,newTodo] = useState(null)
   const [todos, setTodos] = useState([]);
-
   
-
-  function delTodo(index){   //deletefunction
+  function delTodo(index){   
     var newList = todos.filter((item,key) =>{
       return key !== index
     })
     setTodos(newList)
   }
-  function addTodo(e) {
-    e.preventDefault();
-    if (!todo){
+
+  function addTodo(todo) {
+    if (!todo.head){
          alert('Enter data')
     }else{
-        setTodos([...todos,{
-            todoName:todo,
-            isCompleted:false
-        }])
-       newTodo('')
+        setTodos([...todos,todo])
+        console.log(todos)
     }
-    
   }
+
   function completeTodo(index){
     const newTodos = [...todos];
     newTodos[index].isCompleted = true;
     setTodos(newTodos);
   }
-  function uncompleteTodo(index){
-    const newTodos = [...todos];
-    newTodos[index].isCompleted = false;
-    setTodos(newTodos);
-  }
+
   return(
     <div className='Container'>
       
         <div className='Todo'>
         <div className='form-container'>
          <h1 className='form-title'>Add Todo</h1>
-            <form className='form'>
-              <input type="text"  className='input-field' placeholder='Todo HeadLine' value={todo} onChange={(e) => newTodo(e.target.value)} />
-              <button className='btn' onClick={addTodo}>Add</button>
-            </form>
+            <InputTodo addTodo={addTodo} />
         </div>
             {todos.map((todo,index) =>{
               return(
                  <DisTodo 
-                        name = {todo.todoName}
+                        name = {todo.head}
+                        details ={todo.details}
                         index={index}
                         delTodo={delTodo}
+                        type={todo.type}
                         completeTodo ={completeTodo}
-                        uncompleteTodo = {uncompleteTodo}
                         isCompleted = {todo.isCompleted}
                  
                  />
               )
             })
           }
-        
-
-        
-        </div>
+         </div>
   </div>
   )
 }
