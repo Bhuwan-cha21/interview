@@ -1,5 +1,8 @@
+import {React, useState} from 'react'
 import '../App.css'
-export const DisTodo = ({details,isCompleted,name,index, type, completeTodo, delTodo}) => {
+export const DisTodo = ({details,isCompleted,name,index, type, completeTodo, delTodo  , editTodo}) => {
+
+
     return (
       <div className="Item"
         
@@ -13,6 +16,7 @@ export const DisTodo = ({details,isCompleted,name,index, type, completeTodo, del
                     completeTodo(index)
                 }}>complete</button>}
         <button onClick={() => delTodo(index)}> X </button>
+        <button onClick={()  =>editTodo(index)}>Edit Todo</button>
         
       </div>
     );
